@@ -54,9 +54,9 @@ module Airbrake
         error_id = response.body.match(%r{<err-id[^>]*>(.*?)</err-id>})
 
         if with_error_id
-          return notice_id.try(:[], 1), error_id.try(:[], 1)
+          [ notice_id.try(:[], 1), error_id.try(:[], 1) ]
         else
-          return notice_id.try(:[], 1)
+          notice_id.try(:[], 1)
         end
       end
     rescue => e
