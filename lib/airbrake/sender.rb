@@ -52,9 +52,10 @@ module Airbrake
       if response && response.respond_to?(:body)
         notice_id = response.body.match(%r{<_id[^>]*>(.*?)</_id>})
         error_id = response.body.match(%r{<err-id[^>]*>(.*?)</err-id>})
+        problem_id = response.body.match(%r{<problem-id[^>]*>(.*?)</problem-id>})
 
         if with_error_id
-          [ notice_id.try(:[], 1), error_id.try(:[], 1) ]
+          [ notice_id.try(:[], 1), error_id.try(:[], 1), problem_id.try(:[], 1) ]
         else
           notice_id.try(:[], 1)
         end
