@@ -65,9 +65,24 @@ class SenderTest < Test::Unit::TestCase
     assert_equal "3799307", send_exception(:secure => false)
   end
 
+  should "return id if asked for error_id but not present" do
+    http = stub_http(:body => '<_id>3799307</_id>')
+    assert_equal ["3799307", nil, nil], send_exception(:secure => false, :with_error_id => true)
+  end
+
   should "return also the err-id if asked to" do
     http = stub_http(:body => '<_id>3799307</_id><err-id>12345</err-id>')
-    assert_equal ["3799307", "12345"], send_exception(:secure => false, :with_error_id => true)
+    assert_equal ["3799307", "12345", nil], send_exception(:secure => false, :with_error_id => true)
+  end
+
+  should "return also the problem-id if asked to" do
+    http = stub_http(:body => '<_id>3799307</_id><problem-id>12345</problem-id>')
+    assert_equal ["3799307", nil, "12345"], send_exception(:secure => false, :with_error_id => true)
+  end
+
+  should "return also the err-id and problem-if if asked to" do
+    http = stub_http(:body => '<_id>3799307</_id><err-id>12345</err-id><problem-id>67890</problem-id>')
+    assert_equal ["3799307", "12345", "67890"], send_exception(:secure => false, :with_error_id => true)
   end
 
   context "when encountering exceptions: " do
