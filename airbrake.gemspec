@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency("actionpack",    "~> 2.3.8")
   s.add_development_dependency("activerecord",  "~> 2.3.8")
-  s.add_development_dependency("activesupport", "~> 2.3.8")
   s.add_development_dependency("mocha",           "0.10.5")
   s.add_development_dependency("bourne",          ">= 1.0")
   s.add_development_dependency("cucumber",     "~> 0.10.6")
