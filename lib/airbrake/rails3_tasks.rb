@@ -73,7 +73,7 @@ namespace :airbrake do
 
     Rails.application.routes_reloader.execute_if_updated
     Rails.application.routes.draw do
-      match 'verify' => 'application#verify', :as => 'verify'
+      match 'verify' => 'application#verify', :as => 'verify', via: :all
     end
 
     puts 'Processing request.'
